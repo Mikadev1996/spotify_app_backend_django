@@ -19,7 +19,7 @@ environ.Env.read_env()
 CLIENT_ID = env('CLIENT_ID')
 SPOTIFY_SECRET_KEY = env('SPOTIFY_SECRET_KEY')
 CLIENT_SECRET = env('CLIENT_SECRET')
-REDIRECT_URI="http://localhost:8000/spotify_playlist_gen/redirect"
+REDIRECT_URI= env('REDIRECT_URI')
 
 # Django environment variable setup
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -32,9 +32,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3*)0p^tjsktq=^2wf1miv=d+q@v_2ecj)ykel=4q)y_(&w1l1t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['spotify-playlist-gen-django.azurewebsites.net']
 
 # Application definition
 
