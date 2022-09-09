@@ -9,7 +9,6 @@ class SongSerializer(serializers.ModelSerializer):
 
 
 class PlaylistSerializer(serializers.Serializer):
-    artist = serializers.CharField()
     token = serializers.CharField()
     user_id = serializers.CharField()
     track_id = serializers.CharField()
