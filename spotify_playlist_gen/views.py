@@ -71,7 +71,6 @@ class GeneratePlaylist(APIView):
         serializer = PlaylistSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        artist_data = serializer.validated_data['artist']
         token_data = serializer.validated_data['token']
         user_id = serializer.validated_data['user_id']
         track_id = serializer.validated_data['track_id']
@@ -145,5 +144,5 @@ class GeneratePlaylist(APIView):
         add_tracks_to_playlist(json_response, playlist_id)
 
         return Response({'message': 'POST request success',
-                         'data': request.data
+                         'playlist_id': playlist_id,
                          }, status=status.HTTP_200_OK)
