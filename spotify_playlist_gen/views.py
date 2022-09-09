@@ -73,21 +73,11 @@ class GeneratePlaylist(APIView):
 
         artist_data = serializer.validated_data['artist']
         token_data = serializer.validated_data['token']
-        track_data = serializer.validated_data['track']
         user_id = serializer.validated_data['user_id']
+        track_id = serializer.validated_data['track_id']
+        artist_id = serializer.validated_data['artist_id']
         custom_playlist_name = serializer.validated_data.get('playlist_name')
 
-        def search_artist_track(artist, track):
-            track = track.replace(" ", "+")
-            endpoint_url = "https://api.spotify.com/v1/search?"
-            query = f'{endpoint_url}'
-            query += f'q=track%3A{track}%20artist%3A{artist}&type=track'
-            response = requests.get(query, headers={"Content-Type": "application/json",
-                                                    "Authorization": f"Bearer {token_data}"}
-                                    )
-            json_response = response.json()
-            seeds = get_track_artist_id_from_json(json_response)
-            return seeds
 
         def get_track_artist_id_from_json(json_response: dict):
 
