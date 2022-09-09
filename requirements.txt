@@ -1,0 +1,6 @@
+django
+pipenv
+djangorestframework
+django-cors-headers
+django-environ
+spotipy
