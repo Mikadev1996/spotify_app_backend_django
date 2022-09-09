@@ -75,22 +75,10 @@ class GeneratePlaylist(APIView):
         token_data = serializer.validated_data['token']
         user_id = serializer.validated_data['user_id']
         track_id = serializer.validated_data['track_id']
+        track_name = serializer.validated_data['track_name']
         artist_id = serializer.validated_data['artist_id']
+        artist_name = serializer.validated_data['artist_name']
         custom_playlist_name = serializer.validated_data.get('playlist_name')
-
-
-        def get_track_artist_id_from_json(json_response: dict):
-
-            try:
-                artist_id = json_response['tracks']['items'][0]['artists'][0]['id']
-            except:
-                error = "Whoops, something went wrong fetching the artist info - please try again"
-                return Response({error: error}, status=status.HTTP_400_BAD_REQUEST)
-
-            track_id = json_response['tracks']['items'][0]['id']
-            genre = fetch_artist_genre(artist_id)
-            seeds = [artist_id, track_id, genre]
-            return seeds
 
         def fetch_artist_genre(artist_id):
             endpoint_url = f'https://api.spotify.com/v1/artists/{artist_id}'
@@ -150,9 +138,10 @@ class GeneratePlaylist(APIView):
                             data=json.dumps({'uris': uris}), headers=headers)
             return
 
-        seeds = search_artist_track(artist_data, track_data)
+        genre = fetch_artist_genre(artist_id)
+        seeds = [artist_id, track_id, genre]
         json_response = query_api(seeds)
-        playlist_id = create_playlist(artist_data, track_data, custom_playlist_name)
+        playlist_id = create_playlist(artist_name, track_name, custom_playlist_name)
         add_tracks_to_playlist(json_response, playlist_id)
 
         return Response({'message': 'POST request success',
