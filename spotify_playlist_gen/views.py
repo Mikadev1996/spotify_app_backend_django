@@ -1,10 +1,10 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from rest_framework.views import APIView
-from rest_framework import status, viewsets
+from rest_framework import status
 from rest_framework.response import Response
 from requests import Request, post
-from .util import update_or_create_user_tokens, is_spotify_authenticated
-from .serializers import SongSerializer, PlaylistSerializer
+from .util import update_or_create_user_tokens
+from .serializers import PlaylistSerializer
 from .models import Song
 from django.conf import settings
 import random
@@ -17,6 +17,9 @@ CLIENT_SECRET = settings.CLIENT_SECRET
 REDIRECT_URI = settings.REDIRECT_URI
 scope = 'user-read-playback-state user-modify-playback-state user-read-currently-playing playlist-modify-public'
 
+
+def home_view(request):
+    return render(request, 'index.html')
 
 class AuthURL(APIView):
     def get(self, request, format=None):
@@ -49,21 +52,6 @@ class SpotifyCallback(APIView):
             request.session.create()
         update_or_create_user_tokens(request.session.session_key, access_token, token_type, expires_in, refresh_token)
         return redirect(f'http://localhost:3000/auth/{access_token}/{refresh_token}')
-
-
-class IsAuthenticated(APIView):
-    def get(self, request, format=None):
-        token = request.META.get('HTTP_AUTHORIZATION')
-        token = token.split()
-        token = token[1]
-        is_authenticated = is_spotify_authenticated(token)
-
-        return Response({'status': is_authenticated}, status=status.HTTP_200_OK)
-
-
-class SongView(viewsets.ModelViewSet):
-    serializer_class = SongSerializer
-    queryset = Song.objects.all()
 
 
 class GeneratePlaylist(APIView):

@@ -15,16 +15,14 @@ Including another URLconf
 """
 
 from django.urls import path, include
-from .views import AuthURL, SongView, SpotifyCallback, IsAuthenticated, GeneratePlaylist
+from .views import AuthURL, SpotifyCallback, GeneratePlaylist, home_view
 from rest_framework import routers
 
-router = routers.DefaultRouter()
-router.register(r'songs', SongView, 'song')
+
 
 urlpatterns = [
-    path('get-auth-url', AuthURL.as_view()),
-    path('redirect', SpotifyCallback.as_view()),
-    path('is-authenticated', IsAuthenticated.as_view()),
-    path('generate', GeneratePlaylist.as_view()),
-    path('api/', include(router.urls)),
+    path('', home_view),
+    path('spotify/get-auth-url', AuthURL.as_view()),
+    path('spotify/redirect', SpotifyCallback.as_view()),
+    path('spotify/generate', GeneratePlaylist.as_view()),
 ]
