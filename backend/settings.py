@@ -36,7 +36,7 @@ SECRET_KEY = 'django-insecure-3*)0p^tjsktq=^2wf1miv=d+q@v_2ecj)ykel=4q)y_(&w1l1t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://spotify-django-app.azurewebsites.net/']
+ALLOWED_HOSTS = ['spotify-django-app.azurewebsites.net', 'localhost']
 
 # Application definition
 
@@ -136,6 +136,6 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000'
 ]
 
-STATIC_URL = '/static'
+STATIC_URL = '/static/'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
