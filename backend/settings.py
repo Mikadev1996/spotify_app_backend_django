@@ -34,9 +34,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3*)0p^tjsktq=^2wf1miv=d+q@v_2ecj)ykel=4q)y_(&w1l1t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True    
 
-ALLOWED_HOSTS = ['spotify-django-app.azurewebsites.net', 'localhost']
+# ALLOWED_HOSTS = ['spotify-django-app.azurewebsites.net', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
