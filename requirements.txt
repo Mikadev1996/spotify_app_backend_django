@@ -3,3 +3,4 @@ pipenv
 djangorestframework
 django-cors-headers
 django-environ
+environ
