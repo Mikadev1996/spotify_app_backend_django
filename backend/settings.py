@@ -21,6 +21,8 @@ SPOTIFY_SECRET_KEY = env('SPOTIFY_SECRET_KEY')
 CLIENT_SECRET = env('CLIENT_SECRET')
 REDIRECT_URI= env('REDIRECT_URI')
 
+ADMIN = [('Admins', '***REMOVED***')]
+
 # Django environment variable setup
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,7 +36,7 @@ SECRET_KEY = 'django-insecure-3*)0p^tjsktq=^2wf1miv=d+q@v_2ecj)ykel=4q)y_(&w1l1t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['spotify-playlist-gen-django.azurewebsites.net']
+ALLOWED_HOSTS = ['https://spotify-django-app.azurewebsites.net/']
 
 # Application definition
 
@@ -133,3 +135,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000'
 ]
+
+STATIC_URL = '/static'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
